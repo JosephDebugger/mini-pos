@@ -22,8 +22,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminController::class, 'index'])->name('login_form');
     Route::post('/login/owner',[AdminController::class, 'login'])->name('admin.login');
     
-    Route::get('/admin-register',[AdminController::class, 'register'])->name('admin.register');
-Route::post('/admin-registerprocess',[AdminController::class, 'registerprocess'])->name('admin.registerprocess');
+    Route::get('/register',[AdminController::class, 'register'])->name('admin.register');
+Route::post('/registerprocess',[AdminController::class, 'registerprocess'])->name('admin.registerprocess');
     Route::get('/home', [AdminController::class, 'home'])->name('admin.home')->middleware('admin');
     
     Route::resource('product', ProductController::class);
