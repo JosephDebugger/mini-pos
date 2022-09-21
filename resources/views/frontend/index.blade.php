@@ -152,8 +152,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Select Customer</label>
-                                                <select class="form-select" aria-label="Default select example">
+                                                <label class="control-label">Customer type</label>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    name="customer_type">
                                                     <option selected>Select</option>
                                                     <option value="1">Children</option>
                                                     <option value="2">Teen</option>
@@ -165,7 +166,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-primary add_customer">Save</button>
                                             </div>
 
                                         </form>
@@ -301,6 +302,65 @@
             </div>
         </div><!-- container //  -->
     </section>
+
+
+
+    <script>
+    $(document).ready(function() {
+        $(document).on('click', '.add_customer', function(e) {
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var data = {
+                'name': $('.name').val(),
+                'phone': $('.phone').val(),
+                'email': $('.email').val(),
+                'gender': $('.gender').val(),
+                'customer_type': $('.customer_type').val(),
+
+            }
+            console.log(data);
+
+
+            $.ajax({
+                url: "{{ route('customer.store') }}",
+                type: "POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // console.log(response);
+
+                    // if (response == 400) {
+                    //     $('#err_list').html("");
+                    //     $('#err_list').addClass("alert alert-danger");
+                    //     $.each(response.errors, function(key, err_values) {
+                    //         $("#{err_list").append('<li>' + err_values +
+                    //             '</li>');
+                    //     });
+                    // } else {
+
+                    $("#err_list").html("");
+                    $("#success_msg").addClass('alert alert-success');
+                    $("#success_msg").text(response.message);
+                    $("#exampleModal").modal('hide');
+                    $("#exampleModal").find('input').val("");
+
+
+                }
+            });
+
+        });
+    });
+    </script>
+
+
+
+
     <!-- ========================= SECTION CONTENT END// ========================= -->
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
