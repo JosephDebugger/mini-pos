@@ -55,18 +55,19 @@
                                         height="auto">
                                 </td>
                                 <td>
-                                    <div class="btn btn-primary">
-                                        <a href="{{ route('admin-product.show', ['product'=>$product->id] ) }}">Show</a>
+                                    <div>
+                                        <a class="btn btn-primary"
+                                            href="{{ route('product.show', ['product'=>$product->id] ) }}">Show</a>
 
                                     </div>
-                                    <div class="btn btn-primary"> <a
-                                            href="{{ route('admin-product.edit', ['product'=>$product->id] ) }}">Edit</a>
+                                    <div> <a class="btn btn-primary"
+                                            href="{{ route('product.edit', ['product'=>$product->id] ) }}">Edit</a>
                                     </div>
-                                    <div class="btn btn-danger">
-                                        <form action="{{ route('admin-product.destroy', $product ) }}">
+                                    <div>
+                                        <form action="{{ route('product.destroy', $product ) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
-                                            <button type="submit"
+                                            <button class="btn btn-danger" type="submit"
                                                 onclick="return confirm('Are you sure to delete this product')">Delete</button>
                                         </form>
                                     </div>

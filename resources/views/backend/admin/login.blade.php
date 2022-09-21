@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <div class="pt-3">
                                     <button class="btn btn-info" id="to-recover" type="button">
-                                        <i class="mdi mdi-lock fs-4 me-1"></i> Lost password?
+                                        <i class="mdi mdi-lock fs-4 me-1"></i>Lost password?
                                     </button>
                                     <button class="btn btn-success float-end text-white" type="submit">
                                         Login

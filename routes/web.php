@@ -23,11 +23,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/login/owner',[AdminController::class, 'login'])->name('admin.login');
     
     Route::get('/register',[AdminController::class, 'register'])->name('admin.register');
-Route::post('/registerprocess',[AdminController::class, 'registerprocess'])->name('admin.registerprocess');
-    Route::get('/home', [AdminController::class, 'home'])->name('admin.home')->middleware('admin');
+    Route::post('/registerprocess',[AdminController::class, 'registerprocess'])->name('admin.registerprocess');
+    Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
     
-    Route::resource('product', ProductController::class);
+    Route::resource('product', 'ProductController');
 });
+
 
 // Route::group(['namespace' => 'Admin', 
 //             'prefix' => 'admin',

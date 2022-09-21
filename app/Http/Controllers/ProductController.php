@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\product;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 
 class ProductController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products= product::all();
+        $products = Product::all();
         return view('backend.products.index',['products'=>$products]);
     }
 
@@ -28,7 +29,7 @@ class ProductController extends Controller
        $products = product::all();
        return view('backend.products.create',['products'=>$products]);
     }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -38,32 +39,37 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         
-        request()->validate([
-             'name'           =>['required','unique:posts','max:255'],
-             'description'    =>['max:999'],
-             'purchase_price' =>['integer','gt:0','lt:1000'],
-             'sales_price'    =>['required','gt:0','lt:1000'],
-             'quantity'       =>['required','integer','min:1','digits_between: 1,3'],
-        ]);
-
+       
         
-       if($request->hasfile('image')){
+        // request()->validate([
+        //      'name'           =>['required','unique:posts','max:255'],
+        //      'description'    =>['max:999'],
+        //      'purchase_price' =>['integer','gt:0','lt:1000'],
+        //      'sales_price'    =>['required','gt:0','lt:1000'],
+        //      'quantity'       =>['required','integer','min:1','digits_between: 1,3'],
+        // ]);
+
+        // $hello="hello";
+        // dd($hello);
+        if($request->file('image') == !null){
         $file = $request->file('image');
         $extention = $file->getClientOriginalExtension();
-        $filename= 'IMG_'.time().'_'.$extention;
-        $file->move('public/images',$filename);
-       }
-        dd($file);
-        product::create([
+        $filename= 'IMG_'.time().'.'.$extention;
+        $file->move(public_path("images"),$filename);
+         //dd($file);
+        }
+    
+    Product::create([
             'name'=>$request->name,
             'description'=>$request->description,
             'purchase_price'=>$request->purchase_price,
             'sales_price'=>$request->sales_price,
             'quantity'=>$request->quantity,
-            'images'=>$filename,         
+            'image'=>$filename,  
         ]);
-        request()->session()->flash('message','Product Added Successfully');
-        return redirect()->route('admin-product.create');
+      
+        $request->session()->flash('message','Product Added Successfully');
+        return redirect()->route('product.create');
     }
 
 

@@ -28,8 +28,8 @@
                     {{ session('message') }}
                 </div>
                 @endif
-                <form id="productForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data"
-                    role="form">
+                <form id="productForm" method="POST" action="{{ route('product.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label class="control-label">Product Name</label>

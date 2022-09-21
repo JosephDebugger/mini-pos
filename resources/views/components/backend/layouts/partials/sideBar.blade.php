@@ -14,7 +14,7 @@
                             class="hide-menu">Dashboard</span></a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.index') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/product/') }}"
                         aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                             class="hide-menu">Products</span></a>
                 </li>

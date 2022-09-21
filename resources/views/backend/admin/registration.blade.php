@@ -13,10 +13,17 @@
         <div class="auth-box bg-dark border-top border-secondary">
             <div>
                 <div class="text-center pt-3 pb-3">
-                    <span class="db"><img src="../assets/images/logo.png" alt="logo" /></span>
+                    <span class="db"><img src="{{asset('ui/frontend/assets/images/logo.png')}}" alt="logo" /></span>
                 </div>
+                @if(session('error'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ session('error') }}</strong>
+                    <button type=" button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <!-- Form -->
-                <form class="form-horizontal mt-3" action="{{ route('admin.registerprocess') }}" method=" POST">
+                <form class="form-horizontal mt-3" action="{{ route('admin.registerprocess') }}" method="POST">
+                    @csrf
                     <div class=" row pb-4">
                         <div class="col-12">
                             <div class="input-group mb-3">
@@ -25,7 +32,8 @@
                                             class="mdi mdi-account fs-4"></i></span>
                                 </div>
                                 <input type="text" class="form-control form-control-lg" placeholder="Username"
-                                    aria-label="Username" aria-describedby="basic-addon1" required />
+                                    aria-label="Username" aria-describedby="basic-addon1" value="{{old('name')}}"
+                                    name="name" required />
                             </div>
                             <!-- email -->
                             <div class="input-group mb-3">
@@ -34,7 +42,8 @@
                                             class="mdi mdi-email fs-4"></i></span>
                                 </div>
                                 <input type="email" class="form-control form-control-lg" placeholder="Email Address"
-                                    aria-label="Username" aria-describedby="basic-addon1" name="email" equired />
+                                    aria-label="Username" aria-describedby="basic-addon1" value="{{old('email')}}"
+                                    name="email" equired />
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -42,15 +51,17 @@
                                             class="mdi mdi-lock fs-4"></i></span>
                                 </div>
                                 <input type="text" class="form-control form-control-lg" placeholder="Password"
-                                    aria-label="Password" name="password" aria-describedby="basic-addon1" required />
+                                    aria-label="Password" name="password" aria-describedby="basic-addon1"
+                                    value="{{old('name')}}" required />
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-info text-white h-100" id="basic-addon2"><i
                                             class="mdi mdi-lock fs-4"></i></span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg" placeholder=" Confirm Password"
-                                    aria-label="Password" aria-describedby="basic-addon1" required />
+                                <input type="text" class="form-control form-control-lg" placeholder="Confirm Password"
+                                    aria-label="Password" aria-describedby="basic-addon1" name="confirm_password"
+                                    required />
                             </div>
                         </div>
                     </div>

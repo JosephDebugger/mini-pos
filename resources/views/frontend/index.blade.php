@@ -94,6 +94,86 @@
                             <a class="nav-link active show" data-toggle="pill" href="#nav-tab-card">
                                 <i class="fa fa-tags"></i> All</a>
                         </li>
+                        <button type="button nav-item" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Add Customer
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Add New Customer</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="productForm">
+
+                                            <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+                                            <div class="form-group">
+                                                <label class="control-label">Customer Name</label>
+                                                <div>
+                                                    <input type="text" class="name form-control input-lg" id="name"
+                                                        name="name" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Phone</label>
+                                                <div>
+                                                    <input type="text" class="phone form-control input-lg" id="phone"
+                                                        name="phone" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Email</label>
+                                                <div>
+                                                    <input type="email" class="email form-control input-lg" id="email"
+                                                        name="email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Gender</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="flexRadioDefault2">
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Female
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Select Customer</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Select</option>
+                                                    <option value="1">Children</option>
+                                                    <option value="2">Teen</option>
+                                                    <option value="3">Middle Age</option>
+                                                    <option value="3">Old Age</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </ul>
                     <span id="items">
@@ -127,8 +207,25 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card">
+
                         <span id="cart">
+
+                            <div class="">
+
+                                <div class="d-flex nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
+                                    <!-- Button trigger modal -->
+
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Select Customer</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <table class="table table-hover shopping-cart-wrap">
+
                                 <thead class="text-muted">
                                     <tr>
                                         <th scope="col">Item</th>
