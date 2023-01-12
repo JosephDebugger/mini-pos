@@ -64,7 +64,7 @@
                                             href="{{ route('product.edit', ['product'=>$product->id] ) }}">Edit</a>
                                     </div>
                                     <div>
-                                        <form action="{{ route('product.destroy', $product ) }}">
+                                        <form method="POST" action="{{ route('product.destroy', $product ) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
                                             <button class="btn btn-danger" type="submit"

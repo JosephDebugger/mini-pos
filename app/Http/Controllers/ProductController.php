@@ -146,6 +146,6 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         $product->delete();
-        return redirect()->route('admin-product.index');
+        return redirect()->route('product.index');
     }
 }
