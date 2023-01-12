@@ -23,9 +23,8 @@
     <div class="container-fluid">
 
         <div class="card">
-            <div class="card-header"> <a type="button" href="{{ route('admin-product.create') }}"
-                    class="btn btn-primary ">
-                    Edit Product
+            <div class="card-header"> <a type="button" href="{{ route('product.create') }}" class="btn btn-primary ">
+                    Add New Product
                 </a>
             </div>
             <div id="#success_msg"></div>
@@ -36,9 +35,11 @@
                     {{ session('message') }}
                 </div>
                 @endif
-                <form id="productForm" method="POST" action="{{ route('product.update') }}"
-                    enctype="multipart/form-data" role="form">
-                    @csrf
+
+                <form id="productForm" action="{{ route('product.update', ['product' => $product->id] ) }}"
+                    enctype="multipart/form-data" method="POST">
+                    {{ csrf_field() }}
+                    @method('patch')
                     <div class="form-group">
                         <label class="control-label">Product Name</label>
                         <div>
@@ -69,8 +70,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                        <textarea class="description form-control" id="editor description" rows="4" name="description">
-                        {{ $product->description }}</textarea>
+                        <textarea class="description form-control" id="editor description" rows="4"
+                            name="description">{{ $product->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="formFile" class="form-label">Upload Image</label>

@@ -94,8 +94,11 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        $product = Product::find();
-        return view('backend.products.edit',['product'=>$product]);
+        // $product = Product::find($product);
+        
+        return view('backend.products.edit',[
+            'product'=>$product
+        ]);
     }
 
     /**
@@ -107,12 +110,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        if($request->hasfile('image')){
-            $file = $request->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename= 'IMG_'.time().'_'.$extention;
-            $file->move('public/images',$filename);
-           }
+        $file = $request->file('image');
+        $extention = $file->getClientOriginalExtension();
+        $filename= 'IMG_'.time().'_'.$extention;
+        $file->move('public/images',$filename);
+
+       // $filename = request()->file('images')->store('public/images');
+        
+        // if($request->hasfile('image')){
+        //     $file = $request->file('image');
+        //     $extention = $file->getClientOriginalExtension();
+        //     $filename= 'IMG_'.time().'_'.$extention;
+        //     $file->move('public/images',$filename);
+        //    }
            // dd($file);
            $requestData = ([
                 'name'=>$request->name,
@@ -124,7 +134,7 @@ class ProductController extends Controller
             ]);
             $product->update($requestData);
             request()->session()->flash('message','Product Updated Successfully');
-            return redirect()->route('admin-product.update');
+            return redirect()->route('product.index');
     }
 
     /**

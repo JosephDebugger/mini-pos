@@ -12,6 +12,7 @@
     <!-- jQuery -->
     <!-- Bootstrap4 files-->
     <!-- CSS only -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="{{ asset('ui/frontend/assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
@@ -46,7 +47,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3">
                     <div class="brand-wrap">
-                        <img class="logo" src="assets/images/logos/squanchy.jpg">
+                        <img class="logo" src="{{asset('ui/frontend/assets/images/logos/squanchy.jpg')}}">
                         <h2 class="logo-text">POS</h2>
                     </div> <!-- brand-wrap.// -->
                 </div>
@@ -110,66 +111,66 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="productForm">
 
-                                            <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
-                                            <div class="form-group">
-                                                <label class="control-label">Customer Name</label>
-                                                <div>
-                                                    <input type="text" class="name form-control input-lg" id="name"
-                                                        name="name" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Phone</label>
-                                                <div>
-                                                    <input type="text" class="phone form-control input-lg" id="phone"
-                                                        name="phone" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Email</label>
-                                                <div>
-                                                    <input type="email" class="email form-control input-lg" id="email"
-                                                        name="email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Gender</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender"
-                                                        id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Male
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender"
-                                                        id="flexRadioDefault2">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Female
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Customer type</label>
-                                                <select class="form-select" aria-label="Default select example"
-                                                    name="customer_type">
-                                                    <option selected>Select</option>
-                                                    <option value="1">Children</option>
-                                                    <option value="2">Teen</option>
-                                                    <option value="3">Middle Age</option>
-                                                    <option value="3">Old Age</option>
-                                                </select>
-                                            </div>
 
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary add_customer">Save</button>
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <div class="form-group">
+                                            <label class="control-label">Customer Name</label>
+                                            <div>
+                                                <input type="text" class="name form-control input-lg" id="name"
+                                                    name="name" value="">
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Phone</label>
+                                            <div>
+                                                <input type="text" class="phone form-control input-lg" id="phone"
+                                                    name="phone" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+                                            <div>
+                                                <input type="email" class="email form-control input-lg" id="email"
+                                                    name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Gender</label>
+                                            <div class="form-check">
+                                                <input class="gender form-check-input" type="radio" name="gender"
+                                                    id="flexRadioDefault1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="gender form-check-input" type="radio" name="gender"
+                                                    id="flexRadioDefault2">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Customer type</label>
+                                            <select class="form-select" aria-label="Default select example"
+                                                name="customer_type" class="customer_type">
+                                                <option selected>Select</option>
+                                                <option value="1">Children</option>
+                                                <option value="2">Teen</option>
+                                                <option value="3">Middle Age</option>
+                                                <option value="3">Old Age</option>
+                                            </select>
+                                        </div>
 
-                                        </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="add_customer btn btn-primary">Save</button>
+                                        </div>
+
+
                                     </div>
 
                                 </div>
@@ -185,7 +186,7 @@
                                 <figure class="card card-product">
 
                                     <div class="img-wrap">
-                                        <img src="{{ asset('images/'.$product->image) }}">
+                                        <img src="{{  asset('images/'.$product->image)  }}">
                                         <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick
                                             view</a>
                                     </div>
@@ -310,51 +311,51 @@
         $(document).on('click', '.add_customer', function(e) {
             e.preventDefault();
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            var data = {
-                'name': $('.name').val(),
-                'phone': $('.phone').val(),
-                'email': $('.email').val(),
-                'gender': $('.gender').val(),
-                'customer_type': $('.customer_type').val(),
+            console.log('hello');
 
-            }
-            console.log(data);
+            // var data = {
+            //     'name': $('.name').val(),
+            //     'phone': $('.phone').val(),
+            //     'email': $('.email').val(),
+            //     'gender': $('.gender').val(),
+            //     'customer_type': $('.customer_type').val(),
 
-
-            $.ajax({
-                url: "{{ route('customer.store') }}",
-                type: "POST",
-                data: data,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // console.log(response);
-
-                    // if (response == 400) {
-                    //     $('#err_list').html("");
-                    //     $('#err_list').addClass("alert alert-danger");
-                    //     $.each(response.errors, function(key, err_values) {
-                    //         $("#{err_list").append('<li>' + err_values +
-                    //             '</li>');
-                    //     });
-                    // } else {
-
-                    $("#err_list").html("");
-                    $("#success_msg").addClass('alert alert-success');
-                    $("#success_msg").text(response.message);
-                    $("#exampleModal").modal('hide');
-                    $("#exampleModal").find('input').val("");
+            // }
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            // console.log(data);
 
 
-                }
-            });
+            // $.ajax({
+            //     url: "{{ route('customer.store') }}",
+            //     type: "POST",
+            //     data: data,
+            //     dataType: "json",
+            //     success: function(response) {
+            //         console.log(response);
 
+            //         // if (response == 400) {
+            //         //     $('#err_list').html("");
+            //         //     $('#err_list').addClass("alert alert-danger");
+            //         //     $.each(response.errors, function(key, err_values) {
+            //         //         $("#{err_list").append('<li>' + err_values +
+            //         //             '</li>');
+            //         //     });
+            //         // } else {
+
+            //         // $("#err_list").html("");
+            //         // $("#success_msg").addClass('alert alert-success');
+            //         // $("#success_msg").text(response.message);
+            //         // $("#exampleModal").modal('hide');
+            //         // $("#exampleModal").find('input').val("");
+
+
+            //     }
         });
+
     });
     </script>
 

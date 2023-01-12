@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -14,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,31 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+                'name' => 'required|max:191',
+                'phone' =>'max:191',
+                'email'=>'email|max:191',
+                 ]);
+        if($validator->fails())
+                 {
+                    return response()->json([
+                        'status'=>400,
+                        'errors'=>$validator->messages(),
+                    ]);
+                 }
+                 else{
+                    $customer = new Customer;
+                    $customer->name = $request->input('name'); 
+                    $customer->phone = $request->input('phone');
+                    $customer->email = $request->input('email');
+                    $customer->gender = $request->input('gender');
+                    $customer->customer_type = $request->input('customer_type');
+                    $customer->save();
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Student added successfully',
+                    ]);
+                 }
     }
 
     /**
@@ -46,7 +71,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+       //
     }
 
     /**

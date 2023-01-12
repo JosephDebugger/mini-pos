@@ -33,10 +33,11 @@ class AdminController extends Controller
         
         if(Auth::guard('admin')->attempt($check)  == false)
         {
-            return redirect()->route('admin.home')->with('error','Successfully Logged in');
+           
+            return redirect()->back()->with('error','Invalid email or password!');
         }
         else{
-            return redirect()->back()->with('error','Invalid email or password!');
+            return redirect()->route('admin.home')->with('error','Successfully Logged in');
         }
 
     }

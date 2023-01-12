@@ -18,7 +18,8 @@ use App\Http\Controllers\App\Http\Controllers\ProductController;
 
 /*  ----------------- Admin rout----------------- */
 
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin' ], function()
+{
     Route::get('/login',[AdminController::class, 'index'])->name('login_form');
     Route::post('/login/owner',[AdminController::class, 'login'])->name('admin.login');
     
@@ -28,6 +29,9 @@ Route::prefix('admin')->group(function () {
     
     Route::resource('product', 'ProductController');
 });
+
+
+Route::resource('customer', 'CustomerController');
 
 
 // Route::group(['namespace' => 'Admin', 
