@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\product;
+use App\Models\customer;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -14,7 +15,8 @@ class SalesController extends Controller
     public function index()
     {
         $products = product::all();
-        return view('frontend.index',['products'=>$products]);
+        $customars = customer::all();
+        return view('frontend.index',['products'=>$products, 'customers'=>$customars]);
     }
 
     /**

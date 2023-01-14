@@ -139,16 +139,16 @@
                                             <label class="control-label">Gender</label>
                                             <div class="form-check">
                                                 <input class="gender form-check-input" type="radio" name="gender"
-                                                    id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    id="flexRadioDefault1" value="male">
+                                                <label class=" form-check-label" for="flexRadioDefault1">
                                                     Male
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="gender form-check-input" type="radio" name="gender"
-                                                    id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Female
+                                                    id="flexRadioDefault2" value="female>
+                                                <label class=" form-check-label" for="flexRadioDefault2">
+                                                Female
                                                 </label>
                                             </div>
                                         </div>
@@ -157,10 +157,10 @@
                                             <select class="form-select" aria-label="Default select example"
                                                 name="customer_type" class="customer_type">
                                                 <option selected>Select</option>
-                                                <option value="1">Children</option>
-                                                <option value="2">Teen</option>
-                                                <option value="3">Middle Age</option>
-                                                <option value="3">Old Age</option>
+                                                <option value="Children">Children</option>
+                                                <option value="Teen">Teen</option>
+                                                <option value="Middle Age">Middle Age</option>
+                                                <option value="Old Age">Old Age</option>
                                             </select>
                                         </div>
 
@@ -303,59 +303,59 @@
             </div>
         </div><!-- container //  -->
     </section>
-
-
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+    <script src="{{ asset('ui/frontend/assets/js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
 
     <script>
     $(document).ready(function() {
         $(document).on('click', '.add_customer', function(e) {
             e.preventDefault();
 
-            console.log('hello');
+            console.log("hello");
 
-            // var data = {
-            //     'name': $('.name').val(),
-            //     'phone': $('.phone').val(),
-            //     'email': $('.email').val(),
-            //     'gender': $('.gender').val(),
-            //     'customer_type': $('.customer_type').val(),
-
-            // }
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            // console.log(data);
-
-
-            // $.ajax({
-            //     url: "{{ route('customer.store') }}",
-            //     type: "POST",
-            //     data: data,
-            //     dataType: "json",
-            //     success: function(response) {
-            //         console.log(response);
-
-            //         // if (response == 400) {
-            //         //     $('#err_list').html("");
-            //         //     $('#err_list').addClass("alert alert-danger");
-            //         //     $.each(response.errors, function(key, err_values) {
-            //         //         $("#{err_list").append('<li>' + err_values +
-            //         //             '</li>');
-            //         //     });
-            //         // } else {
-
-            //         // $("#err_list").html("");
-            //         // $("#success_msg").addClass('alert alert-success');
-            //         // $("#success_msg").text(response.message);
-            //         // $("#exampleModal").modal('hide');
-            //         // $("#exampleModal").find('input').val("");
+            var data = {
+                'name': $('.name').val(),
+                'phone': $('.phone').val(),
+                'email': $('.email').val(),
+                'gender': $('.gender').val(),
+                'customer_type': $('.customer_type').val(),
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            console.log(data);
 
 
-            //     }
+            $.ajax({
+                url: "{{ route('customer.store') }}",
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+
+                    if (response == 400) {
+                        $('#err_list').html("");
+                        $('#err_list').addClass("alert alert-danger");
+                        $.each(response.errors, function(key, err_values) {
+                            $("#{err_list").append('<li>' + err_values +
+                                '</li>');
+                        });
+                    } else {
+                        $("#err_list").html("");
+                        $("#success_msg").addClass('alert alert-success');
+                        $("#success_msg").text(response.message);
+                        $("#exampleModal").modal('hide');
+                        $("#exampleModal").find('input').val("");
+                    }
+                }
+
+
+            });
         });
-
     });
     </script>
 
@@ -368,9 +368,11 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
 
-    <script src="{{ asset('ui/frontend/assets/js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+
     <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="{{ asset('ui/frontend/assets/js/OverlayScrollbars.js') }}" type="text/javascript"></script>
+
+
     <script>
     $(function() {
         //The passed argument has to be at least a empty object or a object with your desired options
