@@ -15,10 +15,17 @@ class SalesController extends Controller
     public function index()
     {
         $products = product::all();
-        $customars = customer::all();
-        return view('frontend.index',['products'=>$products, 'customers'=>$customars]);
+        $customers = customer::all();
+        return view('frontend.index',['products'=>$products, 'customers'=>$customers]);
     }
-
+    
+    public function fetchcustomers()
+    {
+        $customers = Customer::all();
+        return response()->json([
+            'customers'=>$customers
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

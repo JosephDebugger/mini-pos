@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin' ], function()
     Route::resource('product', 'ProductController');
 });
 
+Route::get('customer/fetchcustomers', [CustomerController::class, 'fetchcustomers']);
 
 Route::resource('customer', 'CustomerController');
 
@@ -49,7 +50,7 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/', [SalesController::class ,'index']);
-
+Route::get('/fetchcustomers', [SalesController::class, 'fetchcustomers']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

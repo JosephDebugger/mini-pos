@@ -18,6 +18,7 @@ class CustomerController extends Controller
         
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,14 +39,23 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(),[
                 'name' => 'required|max:191',
-                'phone' =>'max:191',
+                'phone' =>'required|max:191',
                 'email'=>'email|max:191',
                  ]);
+                 
+
+        //          $validation= request()->validate([
+        //             'name' => 'required|max:191',
+        //             'phone' =>'required|max:191',
+        //             'email'=>'email|max:191',
+        //   ]);
+
+        
         if($validator->fails())
                  {
                     return response()->json([
                         'status'=>400,
-                        'errors'=>$validator->messages(),
+                        'errors'=>$validator->messages()
                     ]);
                  }
                  else{

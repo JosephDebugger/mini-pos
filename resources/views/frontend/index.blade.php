@@ -90,6 +90,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 card padding-y-sm card ">
+                    <div id="success_msg"></div>
                     <ul class="nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active show" data-toggle="pill" href="#nav-tab-card">
@@ -111,7 +112,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-
+                                        <ul id="err_list"></ul>
 
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="form-group">
@@ -169,8 +170,6 @@
                                                 data-bs-dismiss="modal">Close</button>
                                             <button type="button" class="add_customer btn btn-primary">Save</button>
                                         </div>
-
-
                                     </div>
 
                                 </div>
@@ -217,11 +216,11 @@
                                 <div class="d-flex nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
                                     <!-- Button trigger modal -->
 
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select select-drop-down" aria-label="Default select example">
                                         <option selected>Select Customer</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <!-- @foreach($customers as $customer)
+                                        <option value="$customer->name">{{$customer->name}}</option>
+                                        @endforeach -->
                                     </select>
                                 </div>
                             </div>
@@ -309,10 +308,31 @@
 
     <script>
     $(document).ready(function() {
+
+        fetchcustomers();
+
+        function fetchcustomers() {
+            $.ajax({
+                type: "GET",
+                url: " /fetchcustomers",
+                datatype: "json",
+                async: false,
+                success: function(response) {
+                    console.log(response);
+                    $(".select-drop-down").html("");
+                    $.each(response.customers, function(key, item) {
+                        $(".select-drop-down").append(
+                            '<option value="$customer->name">' + item.name +
+                            '</option> ');
+                    });
+
+                }
+            });
+
+        }
+
         $(document).on('click', '.add_customer', function(e) {
             e.preventDefault();
-
-            console.log("hello");
 
             var data = {
                 'name': $('.name').val(),
@@ -323,10 +343,12 @@
             }
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $(
+                            'meta[name="csrf-token"]')
+                        .attr('content')
                 }
             });
-            console.log(data);
+
 
 
             $.ajax({
@@ -337,19 +359,33 @@
                 success: function(response) {
                     console.log(response);
 
-                    if (response == 400) {
+                    if (response.status == 400) {
                         $('#err_list').html("");
-                        $('#err_list').addClass("alert alert-danger");
-                        $.each(response.errors, function(key, err_values) {
-                            $("#{err_list").append('<li>' + err_values +
-                                '</li>');
-                        });
+                        $('#err_list').addClass(
+                            "alert alert-danger"
+                        );
+                        $.each(response.errors,
+                            function(key,
+                                err_values) {
+                                $("#{err_list")
+                                    .append(
+                                        '<li>' +
+                                        err_values +
+                                        '</li>'
+                                    );
+                            });
                     } else {
                         $("#err_list").html("");
-                        $("#success_msg").addClass('alert alert-success');
-                        $("#success_msg").text(response.message);
-                        $("#exampleModal").modal('hide');
-                        $("#exampleModal").find('input').val("");
+                        $("#success_msg").addClass(
+                            'alert alert-success'
+                        );
+                        $("#success_msg").text(
+                            response.message);
+                        $("#exampleModal").modal(
+                            'hide');
+                        $("#exampleModal").find(
+                            'input').val("");
+                        fetchcustomers();
                     }
                 }
 
@@ -369,7 +405,8 @@
     </script>
 
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript">
+    </script>
     <script src="{{ asset('ui/frontend/assets/js/OverlayScrollbars.js') }}" type="text/javascript"></script>
 
 
